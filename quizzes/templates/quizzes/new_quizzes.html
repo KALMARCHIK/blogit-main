@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+    <section>
+        <main>
+            <div class="mt-5 mb-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="container">
+                        <div class="row d-flex justify-content-center">
+                            <div class="col-12 col-md-8 col-lg-8">
+                                <div class="card card-bg">
+                                    <div class="card-body p-5">
+                                        <div class="mb-3 mt-md-4">
+                                                <h2 class="text-center text-primary">
+                                                    <i class="uil uil-edit"></i>
+                                                </h2>
+                                                <div class="text-center">
+                                                    <a href="{% url 'quizzes:quizzes' %}" style="text-decoration: none;"><i class="uil uil-arrow-circle-left"
+   style="padding: 0.3rem;
+          font-size: 25px"></i>Вернуться в тесты</a>
+                                                </div>
+                                            {%if a|length == 0  %}
+                                        <form method="get" class="form-floating mb-3">
+                                            <div class="form-floating mb-1" >
+                                                    Количество вопросов в тесте <input type="number" name="kolvo" required >
+                                                </div>
+
+                                            <div class="text-center">
+                                                        <button class="btn btn-primary rounded-pill" type="submit">Ок</button>
+                                                    </div>
+                                            {%else%}
+                                        </form>
+                                        <form action="" method="POST" class="form-floating mb-3">
+                                            {% csrf_token %}
+
+                                                <div class="form-floating mb-1">
+                                                    <label for="name" class="label">{{ form1.name.label }}</label>
+                                                    {{ form1.name }}
+                                                </div>
+                                             <div class="row mb-3">
+                                        <div class="col-12">
+                                            <h6 class="fw-bold fs-1 text-200 my-3">Вопросы</h6>
+                                        </div>
+                                    </div>
+                                        {% for field in a%}
+                                                    <div class="form-floating mb-3" style="border:1px solid blue;padding:2px">
+                                                        <label for="id_name">Вопрос:</label>
+                                                        <input type="text" name="name" maxlength="350" class="form-control input-box form-ensurance-header-control" required="" id="id_name">
+							<div class="form-floating mb-3">
+                                                        Вариант ответа 1: <input type="text" name="variant" maxlength="350" class="form-control input-box form-ensurance-header-control" required="" id="id_name">
+							Вариант ответа 2: <input type="text" name="variant" maxlength="350" class="form-control input-box form-ensurance-header-control" required="" id="id_name">
+							Вариант ответа 3: <input type="text" name="variant" maxlength="350" class="form-control input-box form-ensurance-header-control" required="" id="id_name">
+							Правильный ответ номер <input type="number" name="right" required min="1" max="3">
+                                                       
+                                                   </div>
+
+                                                       
+                                                   </div>
+                                                {% endfor %}
+                                                <div class="text-center">
+                                                        <button class="btn btn-primary rounded-pill" type="submit">Сохранить</button>
+                                                    </div>
+
+                                                </form>
+                                            {%endif%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        {% endblock content %}
